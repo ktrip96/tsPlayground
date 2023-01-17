@@ -1,6 +1,12 @@
 import React, { useReducer } from 'react'
 import { formReducer, initialState } from './formReducer'
 
+// We use useReducer instead of useState
+// 1st use case: If we use more than two setters inside a fetch for example,
+// its cleaner to use useReducer
+// 2nd use case: We have a form with different types of data
+// so we cant handle everything with one method
+
 type Props = {}
 
 const Parent = (props: Props) => {
