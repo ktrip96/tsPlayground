@@ -3,8 +3,10 @@ import { useModal } from './useModal'
 
 type Props = {}
 
+const InsideModal = () => <h1>Inside the modal</h1>
+
 const Parent = (props: Props) => {
-	const { handleModal, Modal } = useModal()
+	const { handleModal, Modal } = useModal(<InsideModal />)
 
 	return (
 		<div>
