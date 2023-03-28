@@ -1,18 +1,15 @@
 import React from 'react'
-import { useModal } from './useModal'
+import Child from './Child'
+import ChildB from './ChildB'
 
 type Props = {}
 
-const InsideModal = () => <h1>Inside the modal</h1>
-
 const Parent = (props: Props) => {
-	const { handleModal, Modal } = useModal(<InsideModal />)
-
 	return (
 		<div>
-			<h1>Custom Modal Parent Component</h1>
-			<button onClick={handleModal}>Open</button>
-			<Modal />
+			<h2>Custom Modal Parent Component</h2>
+			<Child />
+			<ChildB />
 		</div>
 	)
 }

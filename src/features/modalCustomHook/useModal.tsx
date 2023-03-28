@@ -1,12 +1,17 @@
 import { useState } from 'react'
 import ModalContent from './ModalContent'
 
-export function useModal(children: React.ReactNode) {
+type ModalContentProps = {
+	children: React.ReactNode
+	title?: string
+}
+
+export function useModal() {
 	const [isOpen, setIsOpen] = useState(false)
 
 	const handleModal = () => setIsOpen((prev) => !prev)
-	const Modal = () => (
-		<ModalContent isOpen={isOpen} closeModal={() => setIsOpen(false)}>
+	const Modal = ({ children, title }: ModalContentProps) => (
+		<ModalContent isOpen={isOpen} title={title} closeModal={() => setIsOpen(false)}>
 			{children}
 		</ModalContent>
 	)
