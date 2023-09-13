@@ -2,10 +2,14 @@ import React, { useState } from 'react'
 
 type Props = {
 	name: string
+	arr: boolean[]
+	fn: () => void
 }
 
-const Counter = ({ name }: Props) => {
+const Counter = ({ name, arr, fn }: Props) => {
 	const [counter, setCounter] = useState(0)
+
+	console.log(arr, fn)
 
 	return (
 		<div className='border-2 p-10 rounded-md shadow-lg'>
