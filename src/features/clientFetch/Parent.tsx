@@ -2,27 +2,42 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 
 const Parent = () => {
-	const [singleProduct, setSingleProduct] = useState({})
+	const [counter, setCounter] = useState(0)
+	const [singleProduct, setSingleProduct] = useState('')
+	const fetchProduct = async () => {
+		try {
+			const response = await getSingleProduct()
+			setSingleProduct(response.title)
+		} catch (e) {
+			console.log('error: ', e)
+		}
+	}
 
 	useEffect(() => {
-		const fetchProduct = async () => {
-			try {
-				const response = getSingleProduct()
-				console.log('Response: ', response)
-			} catch (e) {
-				console.log('error: ', e)
-			}
-		}
-		fetchProduct()
+		setTimeout(() => {
+			fetchProduct()
+		}, 3000)
 	}, [])
+
 	return (
 		<div>
-			{JSON.stringify(singleProduct) === '{}' ? <h1>We have no products</h1> : <h1>{singleProduct.title}</h1>}
+			{singleProduct === '' ? (
+				<div>
+					<h1>We have no products</h1>
+					<h2>Counter is : {counter} </h2>
+					<button onClick={() => setCounter((prev) => prev + 1)}>Add</button>
+				</div>
+			) : (
+				<>
+					<h1>{singleProduct}</h1>
+					<h2>Counter is : {counter}</h2>
+				</>
+			)}
 		</div>
 	)
 }
 
-const getSingleProduct = async (): Promise<any> => {
+const getSingleProduct = async (): Promise<{ title: string }> => {
 	const url = 'https://dummyjson.com/products/1'
 	return axios.get(url).then((r) => r.data)
 }
